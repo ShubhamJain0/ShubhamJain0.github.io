@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="POST" action="/deletecart/">	{% csrf_token %}
+<h3>Are you sure you want to clear the cart?</h3>
+
+
+{% for item in objects %}
+{{ item.ordereditems }}
+
+{% endfor %}
+
+<button type="submit" class="bt">Clear</button>
+</form>
+
+
+{% endblock %}

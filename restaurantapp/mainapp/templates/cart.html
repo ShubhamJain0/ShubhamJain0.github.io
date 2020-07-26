@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+{% for obj in objects %}
+
+<p style="font-weight: 800;">{{obj.ordereditems}}  <span style="margin-left: 15px;"> x{{obj.cou}}</span></p>
+
+{% empty %}
+
+<p style="color: rgba(0,0,0,0.5);">Add Something!</p>
+
+
+{% endfor %}
+
+</body>
+</html>
+  
+
+
+
+
+

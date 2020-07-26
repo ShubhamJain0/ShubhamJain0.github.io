@@ -1,0 +1,798 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/order.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/confirm.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+     
+
+<script type="text/javascript">
+
+
+
+
+
+
+
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+ 
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+// Show filtered elements
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current control button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+
+   </script>
+     
+
+
+<style type="text/css">
+    
+.container {
+  overflow: hidden;
+}
+
+.filterDiv {
+
+
+  display: none; /* Hidden by default */
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+
+}
+
+.even{
+    background-color: green;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+
+
+
+
+
+.odd {
+    background-color: orange;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+
+.reduce {
+
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+
+.clear {
+
+    background-color: tomato;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+
+.bt{
+    background-color: green;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+
+.even:hover,
+.odd:hover,
+.reduce:hover,
+.clear:hover,
+.bt:hover,
+.odd:focus,
+.reduce:focus,
+.clear:focus,
+.bt:focus,
+.even:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+
+.cartframe {
+
+    box-shadow: 2px  4px 4px;
+}
+
+
+</style>
+
+  </head>
+
+
+
+
+  
+<body style=" padding-top: 90px;">
+
+{% include 'navbar.html' %}
+
+  	<div class="main-top" style="margin-right: -15px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+         
+                    <div class="right-phone-box">
+                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                    </div>.
+                    <div class="our-link">
+                        <ul>
+                            <li><a href="/manageprofile/" style="text-decoration-line: none;"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            <li><a href="/location/" style="text-decoration-line: none;"><i class="fas fa-location-arrow"></i> Our location</a></li>
+                            <li><a href="/contactpage/" style="text-decoration-line: none;"><i class="fa fa-headset"></i> Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          
+                    <li style="float: right;margin-right: 60px;">
+                        <form class="form-inline my-2 my-lg-0" action="/search/"><input class="form-control mr-sm-2" type="search" placeholder="Search (ex: Veg, Breakfast)" aria-label="Search" name="q" autocomplete="off">
+                            <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+ <div class="Delicious_area">
+       
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center mb-50">
+                        <h3>Delicious Food For You</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="tablist_menu">
+                    <div class="row">
+                            <div class="col-xl-12">
+                                    <ul class="nav justify-content-center" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                              <a class="nav-link active" id="pills-home-tab" data-toggle="pill">
+                                                    <div class="single_menu text-center">
+                                                            <div class="icon">
+                                                                <i class="flaticon-food"></i>
+                                                            </div>
+                                                            <div id="myBtnContainer">
+                                                                <button class="btn active" onclick="filterSelection('all')" style="box-shadow: none;"> All</button>
+                                                            </div>
+                                                    </div>
+                                                </a>
+                                                
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" data-toggle="pill">
+                                                  <div class="single_menu text-center">
+                                                      <div class="icon">
+                                                          <i class="flaticon-lunch"></i>
+                                                      </div>
+                                                      <div id="myBtnContainer">
+                                                        <button class="btn" onclick="filterSelection('Breakfast')" style="box-shadow: none;"> BreakFast</button>
+                                                      </div>
+                                                  </div>
+                                                </a>
+                                            
+                                            </li>
+                                            <li class="nav-item">
+                                             <a class="nav-link " data-toggle="pill" >
+                                                    <div class="single_menu text-center">
+                                                            <div class="icon">
+                                                                <i class="flaticon-food"></i>
+                                                            </div>
+                                                            <div id="myBtnContainer">
+                                                                <button class="btn" onclick="filterSelection('Lunch')" style="box-shadow: none;"> Lunch</button>
+                                                            </div>
+                                                        </div>
+                                            </a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" data-toggle="pill">
+                                                    <div class="single_menu text-center">
+                                                            <div class="icon">
+                                                                <i class="flaticon-kitchen"></i>
+                                                            </div>
+                                                            <div id="myBtnContainer">
+                                                            <button class="btn" onclick="filterSelection('Dinner')" style="box-shadow: none;"> Dinner</button>
+                                                        </div>
+                                                        </div>
+                                               </a>
+                                            </li>
+                                    </ul>
+                            </div>
+                        </div>
+            </div>
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	
+
+<div class="row">
+    <div class="col-xl-7 col-md-7 col-lg-7 col-sm-6 col-xs-7">
+	
+
+
+<div class="container">
+
+    <div class="filterDiv all show active">
+      
+      <form method="POST" class ="form1">
+            {% csrf_token %}
+
+            {% for object in object_list %}
+                          
+            
+                            <div class="single_delicious d-flex align-items-center">
+                                <div class="thumb" style="margin-left:5px;margin-right: 20px;">
+                                    {% if object.image %}
+                                        <img src="{{object.image.url}}" style="width: 130px;">
+                                    {% endif %}
+                                </div>
+                                <div class="info">
+
+                                    <h3>{{ object.items }}</h3>
+                                    <p>Craft beer elit seitan exercitation photo booth et 8-bit kale chips.</p>
+                                    <span>&#8377; {{ object.price }}</span>
+                                    <button  class="even" type="submit" data-items="{{ object.id }}" ><i class="fas fa-cart-plus"></i> Add</button>
+                                    <button class="reduce"  data-item="{{ object.items }}">-</button>
+                                    <button class="odd" data-item="{{ object.items }}" ><i class="fas fa-times"></i> Cancel</button>
+                                  
+                                </div>
+                            
+                            </div>
+                    <br>                
+            
+            {% endfor %}
+
+    
+        </form>
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="filterDiv Breakfast">
+      
+      <form method="POST">
+            {% csrf_token %}
+
+            {% for object in breakfastobj %}
+            
+       
+                            <div class="single_delicious d-flex align-items-center">
+                                <div class="thumb" style="margin-left:5px;margin-right: 20px;">
+                                    {% if object.image %}
+                                        <img src="{{object.image.url}}" style="width: 130px;">
+                                    {% endif %}
+                                </div>
+                                <div class="info">
+
+                                    <h3>{{ object.items }}</h3>
+                                    <p>Craft beer elit seitan exercitation photo booth et 8-bit kale chips.</p>
+                                    <span>&#8377; {{ object.price }}</span>
+                                    <button class="even" type="submit" data-items="{{ object.id }}" ><i class="fas fa-cart-plus"></i> Add</button>
+                                    <button class="reduce"  data-item="{{ object.items }}">-</button>
+                                    <button class="odd" data-item="{{ object.items }}"><i class="fas fa-times"></i> Cancel</button>
+
+                                </div>
+                            
+                            </div>
+                              <br>
+            
+            {% endfor %}
+
+        </form>
+
+
+
+
+  </div>
+
+  <div class="filterDiv Lunch">
+      
+    <form method="POST" >
+            {% csrf_token %}
+
+            {% for object in lunchobj %}
+            
+       
+                            <div class="single_delicious d-flex align-items-center">
+                                <div class="thumb" style="margin-left:5px;margin-right: 20px;">
+                                    {% if object.image %}
+                                        <img src="{{object.image.url}}" style="width: 130px;">
+                                    {% endif %}
+                                </div>
+                                <div class="info">
+
+                                    <h3>{{ object.items }}</h3>
+                                    <p>Craft beer elit seitan exercitation photo booth et 8-bit kale chips.</p>
+                                    <span>&#8377; {{ object.price }}</span>
+                                    <button class="even" type="submit"   data-items="{{ object.id }}"><i class="fas fa-cart-plus"></i> Add</button>
+                                    <button class="reduce"  data-item="{{ object.items }}">-</button>
+                                    <button class="odd" data-item="{{ object.items }}"><i class="fas fa-times"></i> Cancel</button>
+
+                                </div>
+                            
+                            </div>
+                              <br>
+            
+            {% endfor %}
+
+        </form>
+
+  </div>
+
+
+  <div class="filterDiv Dinner">
+      
+      <form method="POST">
+            {% csrf_token %}
+
+            {% for object in dinnerobj %}
+            
+       
+                            <div class="single_delicious d-flex align-items-center">
+                                <div class="thumb" style="margin-left:5px;margin-right: 20px;">
+                                    {% if object.image %}
+                                        <img src="{{object.image.url}}" style="width: 130px;">
+                                    {% endif %}
+                                </div>
+                                <div class="info">
+
+                                    <h3>{{ object.items }}</h3>
+                                    <p>Craft beer elit seitan exercitation photo booth et 8-bit kale chips.</p>
+                                    <span>&#8377; {{ object.price }}</span>
+                                    <button class="even" type="submit" data-items="{{ object.id }}"><i class="fas fa-cart-plus"></i> Add</button>
+                                    <button class="reduce"  data-item="{{ object.items }}">-</button>
+                                    <button class="odd" data-item="{{ object.items }}"><i class="fas fa-times"></i> Cancel</button>
+
+                                </div>
+                            
+                            </div>
+                              <br>
+            
+            {% endfor %}
+
+        </form>
+
+
+
+
+  </div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+		
+	<div class="col-xl-5 col-md-5 col-lg-5 col-sm-5 col-xs-5">
+		<form method="POST" >
+	{% csrf_token %}
+					<iframe src="/carthtml/" class="cartframe" height="350"></iframe><br><br>
+
+
+			<button type="submit" class="clear" >Clear cart</button><br><br>
+
+
+			<a href="/confirm/" class="bt">Confirm Order</a>
+
+		</form>
+
+	</div>
+</div>
+
+
+
+	<footer>
+        <div class="footer-main" style="margin-right: -15px;">
+            <div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>Business Time</h3>
+							<ul class="list-time">
+								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>Social Media</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<ul>
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+				<hr>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-widget">
+                            <h4>About Freshshop</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link">
+                            <h4>Information</h4>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Our Sitemap</a></li>
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Delivery Information</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link-contact">
+                            <h4>Contact Us</h4>
+                            <ul>
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    
+   $('.even').on('click', function (e){
+        e.preventDefault();
+         var data = $(this).data()
+         var mydata = data.items
+        $.ajax({
+            type:'POST',
+            url:'/cart/',
+            data:{
+                ids:mydata,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            
+            success: function(){
+
+           $('.cartframe').attr('src', '/carthtml/');
+            
+          
+            }
+
+
+
+        });
+
+
+             
+    });
+
+
+
+   
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+    
+   $('.reduce').on('click', function (e){
+        e.preventDefault();
+        var data = $(this).data()
+        var mydata = data.item
+        $.ajax({
+            type:'POST',
+            url:'/reduceitem/',
+            data:{
+                items:mydata,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            
+            success: function(){
+            
+            $('.cartframe').attr('src', '/carthtml/');
+            
+            
+          
+            }
+
+
+
+        });
+
+    });
+
+
+
+   
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    
+   $('.odd').on('click', function (e){
+        e.preventDefault();
+         var data = $(this).data()
+         var mydata = data.item
+        $.ajax({
+            type:'POST',
+            url:'/cancel/',
+            data:{
+                items:mydata,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            
+            success: function(){
+
+           $('.cartframe').attr('src', '/carthtml/');
+            
+          
+            }
+
+
+
+        });
+
+
+             
+    });
+
+
+
+   
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    
+   $('.clear').on('click', function (e){
+        e.preventDefault();
+
+        $.ajax({
+            type:'POST',
+            url:'/deletecart/',
+            data:{
+                
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            
+            success: function(){
+
+           $('.cartframe').attr('src', '/carthtml/');
+            
+          
+            }
+
+
+
+        });
+
+
+             
+    });
+
+
+
+   
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

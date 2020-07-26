@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body style="padding-top: 150px;background-color: #f2f7f8;">
+<head>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/manageprofile.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/confirm.css' %}">
+
+<style type="text/css">
+    #photobutton:hover {
+    background-color: black;
+    color: white;
+}
+
+
+
+</style>
+ 
+</head>
+
+                               
+
+
+    <section class="hero-section spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-4">
+                            <div class="hero-info">
+                                <h2 id="Profileh2"><i class="fa fa-user-circle" aria-hidden="true"></i>Welcome, {{ request.user.name }}</h2>
+                                
+                            </div>
+                            <div class="hero-info">
+                                <h2>Edit Profile</h2><hr>
+                                <ul>
+                                    <li><span><i class="fas fa-envelope"></i> E-mail</span>{{ request.user.email }}</li><br><br>
+                                    <li><span><i class="fas fa-unlock"></i> Change Password</span><a href="/password/" style="text-decoration: none;color: black;font-weight: 500;"> here!</a></li><br><br>
+                                    <li><span><i class="fas  fa-address-card"></i> Manage Address</span><a href="/address/" style="text-decoration: none;color: black;font-weight: 500;"> here!</a></li>
+                                    
+                                   
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-4">
+
+                        <br><br>
+                                {% for obj in objects %}
+                                    <img src="{{ obj.image.url }}" style="width: 140px;border-radius: 50%;" id="profileimage">
+                                    {% empty %}
+                                    <h1><i class="fa fa-user-circle fa-3x" aria-hidden="true"></i></h1>
+                                {% endfor %}
+                            
+                             <form enctype="multipart/form-data" method="POST" action="" id="profileform"><br>
+                                <button type="submit" class="btn btn-warning btn-sm" style="margin-bottom: 10px;" id="photobutton">Change Photo <i class="fas  fa-camera"></i></button><br>
+
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+
+
+    </div>
+
+
+
+	<footer>
+        <div class="footer-main">
+            <div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+						<div class="footer-top-box">
+							<h3>Business Time</h3>
+							<ul class="list-time">
+								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+						<div class="footer-top-box">
+							<h3>Social Media</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<ul>
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+				<hr>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-widget">
+                            <h4>About Freshshop</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-link">
+                            <h4>Information</h4>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Our Sitemap</a></li>
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Delivery Information</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-link-contact">
+                            <h4>Contact Us</h4>
+                            <ul>
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+
+{% endblock %}

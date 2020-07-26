@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/loginform.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+    
+
+  </head>
+
+
+  <body>
+    <form class="login-form" method="POST" autocomplete="off">{% csrf_token %}
+      <p class="login-text">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-lock fa-stack-1x"></i>
+        </span>
+      </p>
+      {% for field in form %}
+          {% for error in field.errors %}
+          <p style="color: red;font-family: 'Open Sans'">{{ error }}</p>
+          {% endfor %}
+      {% endfor %}
+
+       <div><i class="fas fa-envelope icon"></i><input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" name="email" /></div>
+       <div><i class="fas fa-lock icon"></i><input type="password" class="login-password" required="true" placeholder="Password" name="password" /></div>
+       <div><i class="fas fa-user icon"></i><input type="text" class="login-username" required="true" placeholder="Username" name="name" /></div>
+      <button type="submit" name="SignUp" value="SignUp" class="login-submit">SignUp  <i class="fa fa-user-plus"></i></button>
+    </form>
+
+    <p style="color: white; font-size: 75%;">Login <a href="/accounts/login/" style="color: white;text-decoration: none;font-weight: 900;"> here</a></p>
+    <div class="underlay-photo"></div>
+    <div class="underlay-black"></div> 
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+
+  	 <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+   
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'css/loginform.css' %}">
+
+    
+
+  </head>
+
+
+  <body>
+		<form class="login-form" method="POST" autocomplete="off">{% csrf_token %}
+		  <p class="login-text">
+		    <span class="fa-stack fa-lg">
+		      <i class="fa fa-circle fa-stack-2x"></i>
+		      <i class="fa fa-lock fa-stack-1x"></i>
+		    </span>
+		  </p>
+			{% for field in form %}
+		        {% for error in field.errors %}
+		          <p style="color: red">{{ error }}</p>
+		        {% endfor %}
+		    {% endfor %}
+		 <div><i class="fas fa-envelope icon"></i><input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" name="email" /></div>
+		 <div><i class="fas fa-lock icon"></i><input type="password" class="login-password" required="true" placeholder="Password" name="password" /></div>
+		 <button type="submit" name="Login" value="Login" class="login-submit">Login <i class="fas fa-sign-in-alt"></i></button>
+
+		  <p style="color: white; font-size: 75%;">Don't have an account? Signup<a href="/accounts/register/" style="color: white;text-decoration: none;font-weight: 900;"> here</a></p>
+
+		                {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div style="color: red;"><strong>{{ error|escape }}</strong></div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+		</form>
+		<a href="/accounts/password/reset/" class="login-forgot-pass">forgot password?</a>
+		<div class="underlay-photo"></div>
+		<div class="underlay-black"></div> 
+
+
+
+</body>
+
+</html>
