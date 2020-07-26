@@ -25,8 +25,8 @@ services:
     image: postgres
     environment:
       - POSTGRES_DB=restaurantapp
-      - POSTGRES_USER=restaurantapp 
-      - POSTGRES_PASSWORD=restaurantapp  
+      - POSTGRES_USER=postgresuser 
+      - POSTGRES_PASSWORD=postgresuser123  
 
   nginx:
       build:
@@ -36,6 +36,6 @@ services:
         - static_files:/staticfiles
         - media_files:/mediafiles
       ports:
-        - "8080:80"
+        - "80:80"
       depends_on:
         - web
