@@ -209,3 +209,22 @@ class BookingTable(models.Model):
 		settings.AUTH_USER_MODEL,
 		on_delete=models.CASCADE
 		)
+
+class Slot(models.Model):
+
+	name = models.CharField(null=True, max_length=20)
+	servicedurationfrom = models.TimeField(default=now)
+	servicedurationto = models.TimeField(default=now)
+	availability = models.CharField(null=True, choices=STATUS_CATEGORY, default='Not Available', max_length=100)
+
+
+
+class Slotlist(models.Model):
+
+	name = models.CharField(null=True, max_length=20)
+	servicedurationfrom = models.TimeField(default=now)
+	servicedurationto = models.TimeField(default=now)
+	user = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.CASCADE
+		)
