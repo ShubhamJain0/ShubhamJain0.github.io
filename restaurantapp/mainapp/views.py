@@ -359,3 +359,35 @@ def Bookingslist(request):
 	qs2 = Image.objects.filter(user=request.user)
 	context = {'objects':qs, 'objs':qs2}
 	return render(request, 'Bookingslist.html', context)
+
+
+@login_required
+def SlotBook(request):
+
+	qs = Slot.objects.all()
+	qs2 = Slotlist.objects.all().values_list('name', flat=True)
+	list_of_bookings=list(qs2)
+	qs3 = Slotlist.objects.filter(user=request.user)
+	if qs3.exists():
+		return HttpResponse('You cannot book multiple slots!')
+	context = {'qs':qs, 'list_of_bookings':list_of_bookings}
+	return render(request, 'slot.html', context)
+
+
+
+@login_required
+def SlotPage(request):
+
+	if request.method == 'POST':
+		ids = request.POST.get('ids')
+		getname = Slot.objects.filter(id=ids).values_list('name', flat=True)
+		for i in getname:
+			name = i
+		getservicefrom = Slot.objects.filter(id=ids).values_list('servicedurationfrom', flat=True)
+		for i in getservicefrom:
+			servicedurationfrom = i
+		getserviceto = Slot.objects.filter(id=ids).values_list('servicedurationto', flat=True)
+		for i in getserviceto:
+			servicedurationto = i
+		Slotlist.objects.create(name=name, servicedurationfrom=servicedurationfrom, servicedurationto=servicedurationto, user=request.user)
+	return render(request, 'sp.html')
