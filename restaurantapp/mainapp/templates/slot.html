@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<form method="POST" action="/SlotPage/">{% csrf_token %}
+{% for o in qs %}
+  
+  {{o.name}}
+  {{o.servicedurationfrom}}
+  {{o.servicedurationto}}
+  {{o.availability}}
+
+  
+  {% if o.name in list_of_bookings %}
+
+            <button type="submit" disabled="disabled">This Slot is Booked!</button><br>
+            
+
+
+  {% else %}
+
+  <button type="submit" value="{{o.id}}" name="ids">Book!</button><br>
+  {% endif %}
+
+  
+{% endfor %}
+
+</form>
+
+{% endblock %}
